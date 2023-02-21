@@ -6,7 +6,8 @@ g_label_names = [
 
 
 def get_raw2scannetv2_label_map():
-    lines = [line.rstrip() for line in open('scannetv2-labels.combined.tsv')]
+    lines = [line.rstrip() for line in open('/app/home/omair/PycharmProjects/SoftGroup/dataset/scannetv2/scannetv2-labels.combined.tsv')]
+    
     lines_0 = lines[0].split('\t')
     print(lines_0)
     print(len(lines))

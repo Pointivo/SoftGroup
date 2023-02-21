@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--data_split', help='data split (train / val / test)', default='train')
 opt = parser.parse_args()
 
-split = opt.data_split
+split = '/app/home/omair/PycharmProjects/SoftGroup/dataset/scannetv2/train' #opt.data_split
 print('data split: {}'.format(split))
 files = sorted(glob.glob(split + '/*_vh_clean_2.ply'))
 if opt.data_split != 'test':
@@ -100,11 +100,27 @@ def f(fn):
 
 # for fn in files:
 #     f(fn)
+f(files[0])
+# print("files = ", len(files))
 
-p = mp.Pool(processes=mp.cpu_count())
-if opt.data_split == 'test':
-    p.map(f_test, files)
-else:
-    p.map(f, files)
-p.close()
-p.join()
+# p = mp.Pool(processes=mp.cpu_count())
+# if opt.data_split == 'test':
+#     p.map(f_test, files)
+# else:
+#     p.map(f, files)
+# p.close()
+# p.join()
+
+'''
+points shape = 81369x3
+colors shape = 81369x3
+sem_labels = 81369x1
+instance_labels = 81369x1
+
+1. crop cuboids from the pointcloud via bbox
+2. give semantic labels to all the points in a cuboid
+    give antenna = label0
+    give dish = label1
+3. give instance labels to all the cuboids
+    each point in the cuboid i.e. antenna or dish will have a unique label (0,1,2,3,4)
+'''
